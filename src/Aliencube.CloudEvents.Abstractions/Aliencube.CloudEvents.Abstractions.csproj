@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Aliencube.CloudEvents.Abstractions</PackageId>
+    <Owners>Aliencube</Owners>
+    <Authors>Justin Yoo</Authors>
+    <Company>Aliencube Community</Company>
+    <Version>1.0.0</Version>
+    <Title>Aliencube.CloudEvents.Abstractions</Title>
+    <Product>Aliencube.CloudEvents.Abstractions</Product>
+    <Summary>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Summary>
+    <Description>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Description>
+    <PackageTags>CloudEvents, OpenEvents</PackageTags>
+    <Copyright>Aliencube Community</Copyright>
+    <PackageLicenseUrl>https://github.com/aliencube/CloudEvents.NET/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/aliencube/CloudEvents.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aliencube/CloudEvents.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
