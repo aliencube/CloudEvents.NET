@@ -1,12 +1,17 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <CollectionProperty Name="RecognizedWords">
+      <Value>deduplication</Value>
       <Value>dev</Value>
       <Value>enums</Value>
       <Value>github</Value>
+      <Value>html</Value>
       <Value>json</Value>
+      <Value>metadata</Value>
       <Value>queryable</Value>
       <Value>querystring</Value>
+      <Value>timestamp</Value>
+      <Value>xml</Value>
     </CollectionProperty>
     <StringProperty Name="Culture">en-US</StringProperty>
   </GlobalSettings>
