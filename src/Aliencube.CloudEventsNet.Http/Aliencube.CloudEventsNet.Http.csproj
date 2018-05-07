@@ -22,4 +22,8 @@
     <RepositoryUrl>https://github.com/aliencube/CloudEvents.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>  </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Aliencube.CloudEventsNet\Aliencube.CloudEventsNet.csproj" />
+  </ItemGroup>
+
 </Project>
