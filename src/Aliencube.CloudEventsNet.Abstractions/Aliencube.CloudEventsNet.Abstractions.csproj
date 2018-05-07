@@ -18,6 +18,7 @@
     <Copyright>Aliencube Community</Copyright>
     <PackageLicenseUrl>https://github.com/aliencube/CloudEvents.NET/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/aliencube/CloudEvents.NET</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/aliencube/CloudEvents.NET/master/icons/cloudeventsnet.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/aliencube/CloudEvents.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
