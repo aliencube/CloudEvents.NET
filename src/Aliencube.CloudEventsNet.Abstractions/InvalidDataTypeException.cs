@@ -6,7 +6,9 @@ using System.Runtime.Serialization;
 
 namespace Aliencube.CloudEventsNet.Abstractions
 {
+#if !NETSTANDARD1_3
     [Serializable]
+#endif
     public class InvalidDataTypeException : Exception
     {
         public InvalidDataTypeException()
