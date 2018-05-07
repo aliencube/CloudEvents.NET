@@ -2,7 +2,7 @@
 
 using Newtonsoft.Json;
 
-namespace Aliencube.CloudEvents.Abstractions
+namespace Aliencube.CloudEventsNet.Abstractions
 {
 
     /// <summary>

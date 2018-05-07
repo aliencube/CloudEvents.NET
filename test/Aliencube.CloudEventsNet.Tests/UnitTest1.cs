@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Aliencube.CloudEvents.Abstractions.Tests
+namespace Aliencube.CloudEventsNet.Tests
 {
     [TestClass]
     public class UnitTest1

@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Aliencube.CloudEvents.Abstractions;
+using Aliencube.CloudEventsNet.Abstractions;
 
 using Newtonsoft.Json;
 
-namespace Aliencube.CloudEvents
+namespace Aliencube.CloudEventsNet
 {
     /// <summary>
     /// This represents the CloudEvent entity containing binary data.
@@ -15,7 +15,7 @@ namespace Aliencube.CloudEvents
         /// Initializes a new instance of the <see cref="BinaryEvent"/> class.
         /// </summary>
         /// <param name="cloudEventsVersion"><see cref="CloudEventsVersion"/> value.</param>
-        public BinaryEvent(string cloudEventsVersion = CloudEvents.CloudEventsVersion.Version01)
+        public BinaryEvent(string cloudEventsVersion = CloudEventsNet.CloudEventsVersion.Version01)
         {
             this.CloudEventsVersion = cloudEventsVersion;
         }

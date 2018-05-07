@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Aliencube.CloudEvents.Abstractions;
+using Aliencube.CloudEventsNet.Abstractions;
 
-namespace Aliencube.CloudEvents
+namespace Aliencube.CloudEventsNet
 {
     /// <summary>
     /// This represents the CloudEvent entity containing string data.
@@ -13,7 +13,7 @@ namespace Aliencube.CloudEvents
         /// Initializes a new instance of the <see cref="StringEvent"/> class.
         /// </summary>
         /// <param name="cloudEventsVersion"><see cref="CloudEventsVersion"/> value.</param>
-        public StringEvent(string cloudEventsVersion = CloudEvents.CloudEventsVersion.Version01)
+        public StringEvent(string cloudEventsVersion = CloudEventsNet.CloudEventsVersion.Version01)
         {
             this.CloudEventsVersion = cloudEventsVersion;
         }

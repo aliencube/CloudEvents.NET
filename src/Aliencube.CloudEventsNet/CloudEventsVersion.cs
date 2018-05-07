@@ -1,4 +1,4 @@
-﻿namespace Aliencube.CloudEvents
+﻿namespace Aliencube.CloudEventsNet
 {
     /// <summary>
     /// This specifies the version entity for CloudEvents.

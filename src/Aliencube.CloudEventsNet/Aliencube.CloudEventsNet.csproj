@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aliencube.CloudEvents.Abstractions\Aliencube.CloudEvents.Abstractions.csproj" />
+    <ProjectReference Include="..\Aliencube.CloudEventsNet.Abstractions\Aliencube.CloudEventsNet.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

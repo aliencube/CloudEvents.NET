@@ -1,7 +1,10 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace Aliencube.CloudEvents.Abstractions
+#if !NETSTANDARD1_3
+using System.Runtime.Serialization;
+#endif
+
+namespace Aliencube.CloudEventsNet.Abstractions
 {
     [Serializable]
     public class InvalidDataTypeException : Exception
@@ -19,8 +22,10 @@ namespace Aliencube.CloudEvents.Abstractions
         {
         }
 
+#if !NETSTANDARD1_3
         protected InvalidDataTypeException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
+#endif
     }
 }
