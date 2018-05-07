@@ -91,7 +91,7 @@ namespace Aliencube.CloudEventsNet.Abstractions
         /// </list>
         /// </remarks>
         [JsonProperty("eventTime", NullValueHandling = NullValueHandling.Ignore)]
-        public virtual DateTimeOffset EventTime { get; set; }
+        public virtual DateTimeOffset? EventTime { get; set; }
 
         /// <summary>
         /// Gets or sets a link to the schema that the data attribute adheres to.

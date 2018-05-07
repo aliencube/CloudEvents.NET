@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Aliencube.CloudEventsNet.Abstractions\Aliencube.CloudEventsNet.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Aliencube.CloudEventsNet.Http.Abstractions\Aliencube.CloudEventsNet.Http.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Headers;
 using System.Text;
 
 using Aliencube.CloudEventsNet.Abstractions;
@@ -14,14 +15,21 @@ namespace Aliencube.CloudEventsNet.Http
     /// <typeparam name="T">Type of CloudEvent data.</typeparam>
     public class StructuredCloudEventContent<T> : CloudEventContent<T>
     {
+        private const string DefaultContentType = "application/cloudevents+json";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StructuredCloudEventContent{T}"/> class.
         /// </summary>
         /// <param name="ce"></param>
         public StructuredCloudEventContent(CloudEvent<T> ce)
-            : base(GetContentByteArray(ce))
+            : base(ce, GetContentByteArray(ce))
         {
-            this.CloudEvent = ce ?? throw new ArgumentNullException(nameof(ce));
+        }
+
+        /// <inheritdoc />
+        protected override MediaTypeHeaderValue GetContentTypeHeader()
+        {
+            return new MediaTypeHeaderValue(this.CloudEvent.ContentType ?? DefaultContentType) { CharSet = "utf-8" };
         }
 
         private static byte[] GetContentByteArray(CloudEvent<T> ce)

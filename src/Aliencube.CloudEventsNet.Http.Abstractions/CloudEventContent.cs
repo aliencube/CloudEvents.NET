@@ -26,16 +26,18 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions
         /// Initializes a new instance of the <see cref="CloudEventContent{T}"/> class.
         /// </summary>
         /// <param name="content">Content as byte array.</param>
-        protected CloudEventContent(byte[] content)
+        protected CloudEventContent(CloudEvent<T> ce, byte[] content)
             : base(content)
         {
+            this.CloudEvent = ce ?? throw new ArgumentNullException(nameof(ce));
+
             this.SetHeaders();
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="CloudEvent{T}"/> instance.
+        /// Gets the <see cref="CloudEvent{T}"/> instance.
         /// </summary>
-        protected CloudEvent<T> CloudEvent { get; set; }
+        protected CloudEvent<T> CloudEvent { get; }
 
         /// <summary>
         /// Checks whether the content type of the <see cref="CloudEvent{T}"/> instance indicates structured or not.
@@ -57,9 +59,18 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions
             return false;
         }
 
+        /// <summary>
+        /// Gets the content type header.
+        /// </summary>
+        /// <returns>Returns the content type header.</returns>
+        protected virtual MediaTypeHeaderValue GetContentTypeHeader()
+        {
+            return null;
+        }
+
         private void SetHeaders()
         {
-            this.Headers.ContentType = new MediaTypeHeaderValue(this.CloudEvent.ContentType) { CharSet = "utf-8" };
+            this.Headers.ContentType = this.GetContentTypeHeader();
 
             this.SetCloudEventHeaders();
             this.SetCloudEventExtensionHeaders();
@@ -68,16 +79,34 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions
         private void SetCloudEventHeaders()
         {
             this.Headers.Add(CeEventTypeHeaderKey.ToUpperInvariant(), this.CloudEvent.EventType);
-            this.Headers.Add(CeEventTypeVersionHeaderKey.ToUpperInvariant(), this.CloudEvent.EventTypeVersion);
+
+            if (!string.IsNullOrWhiteSpace(this.CloudEvent.EventTypeVersion))
+            {
+                this.Headers.Add(CeEventTypeVersionHeaderKey.ToUpperInvariant(), this.CloudEvent.EventTypeVersion);
+            }
+
             this.Headers.Add(CeCloudEventsVersionHeaderKey.ToUpperInvariant(), this.CloudEvent.CloudEventsVersion);
             this.Headers.Add(CeSourceHeaderKey.ToUpperInvariant(), this.CloudEvent.Source.ToString());
             this.Headers.Add(CeEventIdHeaderKey.ToUpperInvariant(), this.CloudEvent.EventId);
-            this.Headers.Add(CeEventTimeHeaderKey.ToUpperInvariant(), this.CloudEvent.EventTime.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz"));
-            this.Headers.Add(CeSchemaUrlHeaderKey.ToUpperInvariant(), this.CloudEvent.SchemaUrl.ToString());
+
+            if (this.CloudEvent.EventTime.HasValue)
+            {
+                this.Headers.Add(CeEventTimeHeaderKey.ToUpperInvariant(), this.CloudEvent.EventTime.Value.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz"));
+            }
+
+            if (this.CloudEvent.SchemaUrl != null)
+            {
+                this.Headers.Add(CeSchemaUrlHeaderKey.ToUpperInvariant(), this.CloudEvent.SchemaUrl.ToString());
+            }
         }
 
         private void SetCloudEventExtensionHeaders()
         {
+            if (this.CloudEvent.Extensions == null)
+            {
+                return;
+            }
+
             var serislised = JsonConvert.SerializeObject(this.CloudEvent.Extensions);
             var deserialised = JsonConvert.DeserializeObject<JObject>(serislised);
 

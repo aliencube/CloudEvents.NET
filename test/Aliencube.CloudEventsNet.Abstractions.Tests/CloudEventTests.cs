@@ -27,7 +27,7 @@ namespace Aliencube.CloudEventsNet.Abstractions.Tests
             typeof(CloudEvent<int>).Should().HaveProperty<string>("CloudEventsVersion").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
             typeof(CloudEvent<int>).Should().HaveProperty<Uri>("Source").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
             typeof(CloudEvent<int>).Should().HaveProperty<string>("EventId").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
-            typeof(CloudEvent<int>).Should().HaveProperty<DateTimeOffset>("EventTime").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
+            typeof(CloudEvent<int>).Should().HaveProperty<DateTimeOffset?>("EventTime").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
             typeof(CloudEvent<int>).Should().HaveProperty<Uri>("SchemaUrl").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
             typeof(CloudEvent<int>).Should().HaveProperty<string>("ContentType").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
             typeof(CloudEvent<int>).Should().HaveProperty<object>("Extensions").Subject.Should().BeDecoratedWith<JsonPropertyAttribute>();
