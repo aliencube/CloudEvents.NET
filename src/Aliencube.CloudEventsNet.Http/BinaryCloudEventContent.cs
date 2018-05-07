@@ -1,53 +1,59 @@
-﻿using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System;
+using System.Text;
+
+using Aliencube.CloudEventsNet.Abstractions;
+using Aliencube.CloudEventsNet.Http.Abstractions;
+
+using Newtonsoft.Json;
 
 namespace Aliencube.CloudEventsNet.Http
 {
-    public class BinaryCloudEventContent : ByteArrayContent
+    /// <summary>
+    /// This represents the CloudEvent content entity as binary mode.
+    /// </summary>
+    /// <typeparam name="T">Type of CloudEvent data.</typeparam>
+    public class BinaryCloudEventContent<T> : CloudEventContent<T>
     {
-        public BinaryCloudEventContent(byte[] content) : base(content)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryCloudEventContent{T}"/> class.
+        /// </summary>
+        /// <param name="ce"></param>
+        public BinaryCloudEventContent(CloudEvent<T> ce)
+            : base(GetContentByteArray(ce))
         {
+            this.CloudEvent = ce ?? throw new ArgumentNullException(nameof(ce));
         }
 
-        public BinaryCloudEventContent(byte[] content, int offset, int count) : base(content, offset, count)
+        private static byte[] GetContentByteArray(CloudEvent<T> ce)
         {
-        }
+            if (ce == null)
+            {
+                throw new ArgumentNullException(nameof(ce));
+            }
 
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
+            if (ce.Data == null)
+            {
+                throw new InvalidOperationException("Data in CloudEvent can't be null");
+            }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+            if (IsStructuredCloudEventContentType(ce))
+            {
+                throw new InvalidContentTypeException();
+            }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+            if (ce.Data is string)
+            {
+                return Encoding.UTF8.GetBytes(ce.Data as string);
+            }
 
-        protected override Task<Stream> CreateContentReadStreamAsync()
-        {
-            return base.CreateContentReadStreamAsync();
-        }
+            if (ce.Data is byte[])
+            {
+                return ce.Data as byte[];
+            }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
+            var serialised = JsonConvert.SerializeObject(ce.Data);
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
-        {
-            return base.SerializeToStreamAsync(stream, context);
-        }
-
-        protected override bool TryComputeLength(out long length)
-        {
-            return base.TryComputeLength(out length);
+            return Encoding.UTF8.GetBytes(serialised);
         }
     }
 }

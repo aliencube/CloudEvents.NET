@@ -5,13 +5,13 @@
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>Aliencube.CloudEvents</PackageId>
+    <PackageId>Aliencube.CloudEventsNet</PackageId>
     <Owners>Aliencube</Owners>
     <Authors>Justin Yoo</Authors>
     <Company>Aliencube Community</Company>
     <Version>0.0.1</Version>
-    <Title>Aliencube.CloudEvents</Title>
-    <Product>Aliencube.CloudEvents</Product>
+    <Title>Aliencube.CloudEventsNet</Title>
+    <Product>Aliencube.CloudEventsNet</Product>
     <Summary>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Summary>
     <Description>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Description>
     <PackageTags>CloudEvents, OpenEvents</PackageTags>

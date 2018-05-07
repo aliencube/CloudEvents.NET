@@ -11,6 +11,7 @@
       <Value>queryable</Value>
       <Value>querystring</Value>
       <Value>timestamp</Value>
+      <Value>utf</Value>
       <Value>xml</Value>
     </CollectionProperty>
     <StringProperty Name="Culture">en-US</StringProperty>

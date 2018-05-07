@@ -1,50 +1,44 @@
 ﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+using System.Text;
+
+using Aliencube.CloudEventsNet.Abstractions;
+using Aliencube.CloudEventsNet.Http.Abstractions;
+
+using Newtonsoft.Json;
 
 namespace Aliencube.CloudEventsNet.Http
 {
-    public class StructuredCloudEventContent : HttpContent
+    /// <summary>
+    /// This represents the CloudEvent content entity as structured mode.
+    /// </summary>
+    /// <typeparam name="T">Type of CloudEvent data.</typeparam>
+    public class StructuredCloudEventContent<T> : CloudEventContent<T>
     {
-        protected StructuredCloudEventContent()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StructuredCloudEventContent{T}"/> class.
+        /// </summary>
+        /// <param name="ce"></param>
+        public StructuredCloudEventContent(CloudEvent<T> ce)
+            : base(GetContentByteArray(ce))
         {
+            this.CloudEvent = ce ?? throw new ArgumentNullException(nameof(ce));
         }
 
-        public override bool Equals(object obj)
+        private static byte[] GetContentByteArray(CloudEvent<T> ce)
         {
-            return base.Equals(obj);
-        }
+            if (ce == null)
+            {
+                throw new ArgumentNullException(nameof(ce));
+            }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+            if (!IsStructuredCloudEventContentType(ce))
+            {
+                throw new InvalidContentTypeException();
+            }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+            var serialised = JsonConvert.SerializeObject(ce);
 
-        protected override Task<Stream> CreateContentReadStreamAsync()
-        {
-            return base.CreateContentReadStreamAsync();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override bool TryComputeLength(out long length)
-        {
-            throw new NotImplementedException();
+            return Encoding.UTF8.GetBytes(serialised);
         }
     }
 }

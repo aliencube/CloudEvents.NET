@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Aliencube.CloudEventsNet.Abstractions
 {
-
     /// <summary>
     /// This represents the CloudEvent entity. This MUST be inherited.
     /// </summary>
