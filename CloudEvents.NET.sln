@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aliencube.CloudEventsNet.Ht
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aliencube.CloudEventsNet.Http.Abstractions.Tests", "test\Aliencube.CloudEventsNet.Http.Abstractions.Tests\Aliencube.CloudEventsNet.Http.Abstractions.Tests.csproj", "{B9ADE2BC-852F-474A-A487-3FA27F877E1A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{AEAC7B97-039D-4554-A219-73F29E7CA13A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aliencube.CloudEventsNet.ApiApp", "sample\Aliencube.CloudEventsNet.ApiApp\Aliencube.CloudEventsNet.ApiApp.csproj", "{73AA882F-E7AF-410E-980E-3B031A01E80E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73AA882F-E7AF-410E-980E-3B031A01E80E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73AA882F-E7AF-410E-980E-3B031A01E80E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73AA882F-E7AF-410E-980E-3B031A01E80E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73AA882F-E7AF-410E-980E-3B031A01E80E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +99,7 @@ Global
 		{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6} = {B456A9C9-98D5-4317-8903-4DE430C72846}
 		{690A70CF-18BA-4B89-85C6-2CD47179D9E1} = {B334CF00-201E-4F6D-BF5B-AABB2D7E5A0A}
 		{B9ADE2BC-852F-474A-A487-3FA27F877E1A} = {B456A9C9-98D5-4317-8903-4DE430C72846}
+		{73AA882F-E7AF-410E-980E-3B031A01E80E} = {AEAC7B97-039D-4554-A219-73F29E7CA13A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EBA2954-9B5E-4B91-91C0-D81CE12CF573}
