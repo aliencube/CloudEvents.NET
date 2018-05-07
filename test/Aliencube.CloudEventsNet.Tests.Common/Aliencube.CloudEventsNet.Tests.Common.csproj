@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aliencube.CloudEventsNet.Abstractions\Aliencube.CloudEventsNet.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Aliencube.CloudEventsNet.Http.Abstractions\Aliencube.CloudEventsNet.Http.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

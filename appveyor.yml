@@ -72,12 +72,14 @@
   build:
     verbosity: minimal
   artifacts:
-  - path: .\src\Aliencube.CloudEvents.Abstractions\**\*.nupkg
-    name: Aliencube.CloudEvents.Abstractions
-  - path: .\src\Aliencube.CloudEvents\**\*.nupkg
-    name: Aliencube.CloudEvents
-  - path: .\src\Aliencube.CloudEvents.Http\**\*.nupkg
-    name: Aliencube.CloudEvents.Http
+  - path: .\src\Aliencube.CloudEventsNet.Abstractions\**\*.nupkg
+    name: Aliencube.CloudEventsNet.Abstractions
+  - path: .\src\Aliencube.CloudEventsNet\**\*.nupkg
+    name: Aliencube.CloudEventsNet
+  - path: .\src\Aliencube.CloudEventsNet.Http.Abstractions\**\*.nupkg
+    name: Aliencube.CloudEventsNet.Http.Abstractions
+  - path: .\src\Aliencube.CloudEventsNet.Http\**\*.nupkg
+    name: Aliencube.CloudEventsNet.Http
   deploy:
   - provider: Environment
     name: NuGet for CloudEvents.NET

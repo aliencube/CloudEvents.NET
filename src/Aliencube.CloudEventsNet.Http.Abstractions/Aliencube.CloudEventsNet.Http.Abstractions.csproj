@@ -1,24 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>Aliencube.CloudEvents.Http</PackageId>
+    <PackageId>Aliencube.CloudEventsNet.Http.Abstractions</PackageId>
     <Owners>Aliencube</Owners>
     <Authors>Justin Yoo</Authors>
     <Company>Aliencube Community</Company>
-    <Version>1.0.0</Version>
-    <Title>Aliencube.CloudEvents.Http</Title>
-    <Product>Aliencube.CloudEvents.Http</Product>
+    <Version>0.0.1</Version>
+    <Title>Aliencube.CloudEventsNet.Http.Abstractions</Title>
+    <Product>Aliencube.CloudEventsNet.Http.Abstractions</Product>
     <Summary>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Summary>
     <Description>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Description>
     <PackageTags>CloudEvents, OpenEvents</PackageTags>
     <Copyright>Aliencube Community</Copyright>
     <PackageLicenseUrl>https://github.com/aliencube/CloudEvents.NET/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/aliencube/CloudEvents.NET</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/aliencube/CloudEvents.NET/master/icons/cloudeventsnet.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/aliencube/CloudEvents.NET</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>  </PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aliencube.CloudEventsNet.Abstractions\Aliencube.CloudEventsNet.Abstractions.csproj" />
+  </ItemGroup>
 
 </Project>
