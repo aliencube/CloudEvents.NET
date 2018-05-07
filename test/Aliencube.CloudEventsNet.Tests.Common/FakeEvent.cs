@@ -25,4 +25,16 @@ namespace Aliencube.CloudEventsNet.Tests.Common
             return true;
         }
     }
+
+    /// <summary>
+    /// This represents the fake CloudEvent entity.
+    /// </summary>
+    public class TheOtherFakeEvent : CloudEvent<FakeData>
+    {
+        /// <inheritdoc />
+        protected override bool IsValidDataType(FakeData data)
+        {
+            return true;
+        }
+    }
 }

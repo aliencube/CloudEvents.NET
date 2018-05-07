@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using Aliencube.CloudEventsNet.Abstractions;
 using Aliencube.CloudEventsNet.Http.Abstractions;
@@ -22,20 +23,65 @@ namespace Aliencube.CloudEventsNet.Http.Tests
         [TestMethod]
         public void Given_NoParameter_When_Instantiated_Should_ThrowException()
         {
-            var data = "hello world";
-
             Action action = () => new BinaryCloudEventContent<string>(null);
             action.Should().Throw<ArgumentNullException>();
+        }
 
-            var ce = new AnotherFakeEvent() { ContentType = "application/json" };
+        [TestMethod]
+        public void Given_Parameter_When_Instantiated_Should_ThrowException()
+        {
+            var data = "hello world";
 
-            action = () => new BinaryCloudEventContent<string>(ce);
+            var ce = new AnotherFakeEvent();
+
+            Action action = () => new BinaryCloudEventContent<string>(ce);
             action.Should().Throw<InvalidOperationException>();
 
+            ce.ContentType = "application/json";
             ce.Data = data;
 
             action = () => new BinaryCloudEventContent<string>(ce);
             action.Should().Throw<InvalidContentTypeException>();
+        }
+
+        [TestMethod]
+        public void Given_Parameter_When_Instantiated_Should_HaveContentType()
+        {
+            var contentType = "text/plain";
+            var charset = "utf-8";
+            var data = "hello world";
+
+            var ce = new AnotherFakeEvent();
+            ce.EventType = "com.example.someevent";
+            ce.Source = new Uri("http://localhost");
+            ce.EventId = Guid.NewGuid().ToString();
+            ce.ContentType = contentType;
+            ce.Data = data;
+
+            var content = new BinaryCloudEventContent<string>(ce);
+
+            content.Headers.ContentType.MediaType.Should().Be(contentType);
+            content.Headers.ContentType.CharSet.Should().Be(charset);
+        }
+
+        [TestMethod]
+        public async Task Given_Parameter_When_Instantiated_Should_HaveContent()
+        {
+            var contentType = "text/plain";
+            var data = "hello world";
+
+            var ce = new AnotherFakeEvent();
+            ce.EventType = "com.example.someevent";
+            ce.Source = new Uri("http://localhost");
+            ce.EventId = Guid.NewGuid().ToString();
+            ce.ContentType = contentType;
+            ce.Data = data;
+
+            var content = new BinaryCloudEventContent<string>(ce);
+
+            var result = await content.ReadAsStringAsync().ConfigureAwait(false);
+
+            result.Should().Be(data);
         }
     }
 }
