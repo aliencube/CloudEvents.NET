@@ -5,9 +5,17 @@ This is a .NET implementation of CloudEvents (OpenEvents) spec defined by [Cloud
 > Current spec of CloudEvents is the version of [`0.1`](https://github.com/cloudevents/spec).
 
 
+## Versions ##
+
+**CloudEvents.NET** intends to follow the same versioning approach as CloudEvents spec. However, it has two different variations for .NET Standard 1.3 - 1.6, and .NET Standard 2.0+.
+
+* `*.*.1.*`: This version targets .NET Standard 1.3 - 1.6. `eg) 0.1.1.0`
+* `*.*.2.*`: This version targets .NET Standard 2.0 and later. `eg) 0.1.2.0`
+
+
 ## `Aliencube.CloudEventsNet.Abstractions` ##
 
-This defines interfaces and abstract classes for CloudEvents.
+This defines interfaces and abstract classes for CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md).
 
 TBD
 
@@ -19,9 +27,16 @@ This implements CloudEvents based on the [CloudEvents spec](https://github.com/c
 TBD
 
 
+## `Aliencube.CloudEventsNet.Http.Abstractions` ##
+
+This defines interfaces and abstract classes for CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
+
+TBD
+
+
 ## `Aliencube.CloudEventsNet.Http` ##
 
-This implements CloudEvents to be [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
+This implements CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
 
 TBD
 
