@@ -9,7 +9,7 @@
     <Owners>Aliencube</Owners>
     <Authors>Justin Yoo</Authors>
     <Company>Aliencube Community</Company>
-    <Version>1.0.0</Version>
+    <Version>0.0.1</Version>
     <Title>Aliencube.CloudEvents.Http</Title>
     <Product>Aliencube.CloudEvents.Http</Product>
     <Summary>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Summary>
@@ -18,6 +18,7 @@
     <Copyright>Aliencube Community</Copyright>
     <PackageLicenseUrl>https://github.com/aliencube/CloudEvents.NET/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/aliencube/CloudEvents.NET</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/aliencube/CloudEvents.NET/master/icons/cloudeventsnet.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/aliencube/CloudEvents.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>  </PropertyGroup>
 
