@@ -14,4 +14,9 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aliencube.CloudEventsNet\Aliencube.CloudEventsNet.csproj" />
+    <ProjectReference Include="..\Aliencube.CloudEventsNet.Tests.Common\Aliencube.CloudEventsNet.Tests.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,14 @@ namespace Aliencube.CloudEventsNet
     /// <summary>
     /// This represents the CloudEvent entity containing object data.
     /// </summary>
+    public class ObjectEvent : ObjectEvent<object>
+    {
+    }
+
+    /// <summary>
+    /// This represents the CloudEvent entity containing object data.
+    /// </summary>
+    /// <typeparam name="T">Type of data object.</typeparam>
     public class ObjectEvent<T> : CloudEvent<T> where T : class
     {
         /// <summary>
