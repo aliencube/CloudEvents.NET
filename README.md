@@ -4,6 +4,8 @@ This is a .NET implementation of CloudEvents (OpenEvents) spec defined by [Cloud
 
 > Current spec of CloudEvents is the version of [`0.1`](https://github.com/cloudevents/spec).
 
+[![Build status](https://ci.appveyor.com/api/projects/status/um0krn2e8fm9femb/branch/dev?svg=true)](https://ci.appveyor.com/project/justinyoo/cloudevents-net/branch/dev)
+
 
 ## Versions ##
 
@@ -15,12 +17,16 @@ This is a .NET implementation of CloudEvents (OpenEvents) spec defined by [Cloud
 
 ## `Aliencube.CloudEventsNet.Abstractions` ##
 
+[![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/)
+
 This defines interfaces and abstract classes for CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md).
 
 TBD
 
 
 ## `Aliencube.CloudEventsNet` ##
+
+[![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/)
 
 This implements CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md).
 
@@ -29,12 +35,16 @@ TBD
 
 ## `Aliencube.CloudEventsNet.Http.Abstractions` ##
 
+[![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/)
+
 This defines interfaces and abstract classes for CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
 
 TBD
 
 
 ## `Aliencube.CloudEventsNet.Http` ##
+
+[![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/)
 
 This implements CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
 
