@@ -4,15 +4,11 @@ This is a .NET implementation of CloudEvents (OpenEvents) spec defined by [Cloud
 
 > Current spec of CloudEvents is the version of [`0.1`](https://github.com/cloudevents/spec).
 
-[![Build status](https://ci.appveyor.com/api/projects/status/um0krn2e8fm9femb/branch/dev?svg=true)](https://ci.appveyor.com/project/justinyoo/cloudevents-net/branch/dev)
-
-
-## Versions ##
-
-**CloudEvents.NET** intends to follow the same versioning approach as CloudEvents spec. However, it has two different variations for .NET Standard 1.3 - 1.6, and .NET Standard 2.0+.
-
-* `*.*.1.*`: This version targets .NET Standard 1.3 - 1.6. `eg) 0.1.1.0`
-* `*.*.2.*`: This version targets .NET Standard 2.0 and later. `eg) 0.1.2.0`
+* [![Build status](https://ci.appveyor.com/api/projects/status/um0krn2e8fm9femb/branch/dev?svg=true)](https://ci.appveyor.com/project/justinyoo/cloudevents-net/branch/dev) [AppVeyor](https://ci.appveyor.com/project/justinyoo/cloudevents-net)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/) [`Aliencube.CloudEventsNet.Abstractions`](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/) [`Aliencube.CloudEventsNet`](https://www.nuget.org/packages/Aliencube.CloudEventsNet/)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/) [`Aliencube.CloudEventsNet.Http.Abstractions`](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/) [`Aliencube.CloudEventsNet.Http`](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/)
 
 
 ## `Aliencube.CloudEventsNet.Abstractions` ##
@@ -21,16 +17,93 @@ This is a .NET implementation of CloudEvents (OpenEvents) spec defined by [Cloud
 
 This defines interfaces and abstract classes for CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md).
 
-TBD
-
 
 ## `Aliencube.CloudEventsNet` ##
 
 [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/)
 
-This implements CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md).
+This implements CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md). According to the spec, the `data` property of the CloudEvent payload can be either `string`, `binary` (base-64 encoded string) or `object`. Therfore, the actual implementation also has three different types, `StringEvent`, `BinaryEvent` and `ObjectEvent` respectively. Each event object has its own distinctive content type.
 
-TBD
+
+### ObjectEvent ###
+
+`ObjectEvent` or `ObjectEvent<T>` object only takes care of the content type of `application/json` or of having suffix of `+json`. Therefore, the implementation has the validation logic like below:
+
+```csharp
+public class ObjectEvent<T> : CloudEvent<T> where T : class
+{
+    ...
+
+    protected override bool IsValidDataType(T data)
+    {
+        if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return true;
+        }
+
+        if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
+```
+
+
+### StringEvent ###
+
+`StringEvent` object only takes care of string content types, which is basically of all MIME type starting with `text/`. Therefore, the implementation has the validation logic like below:
+
+```csharp
+public class StringEvent : CloudEvent<string>
+{
+    ...
+
+    protected override bool IsValidDataType(string data)
+    {
+        if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
+```
+
+
+### BinaryEvent ###
+
+`BinaryEvent` object takes care of the rest of all content types. Therefore, the implementation has the validation logic like below:
+
+```csharp
+public class BinaryEvent : CloudEvent<byte[]>
+{
+    ...
+
+    protected override bool IsValidDataType(byte[] data)
+    {
+        if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return false;
+        }
+
+        if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return false;
+        }
+
+        if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return false;
+        }
+
+        return true;
+    }
+}
+```
 
 
 ## `Aliencube.CloudEventsNet.Http.Abstractions` ##
@@ -39,16 +112,59 @@ TBD
 
 This defines interfaces and abstract classes for CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
 
-TBD
-
 
 ## `Aliencube.CloudEventsNet.Http` ##
 
 [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/)
 
-This implements CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md).
+This implements CloudEvents [transported over HTTP](https://github.com/cloudevents/spec/blob/master/http-transport-binding.md). According to the document, when a CloudEvent object is passed over HTTP, it can be under a `Binary` mode or `Structured` mode.
 
-TBD
+
+### `StructuredCloudEventContent<T>` ###
+
+`StructuredCloudEventContent<T>` takes only `ObjectEvent`, and store the entire `ObjectEvent` instance into the payload. Therefore, the `ObjectEvent` instance itself is serialised and converted to byte array.
+
+```csharp
+public class StructuredCloudEventContent<T> : CloudEventContent<T>
+{
+    ...
+
+    private static byte[] GetContentByteArray(CloudEvent<T> ce)
+    {
+        ...
+        var serialised = JsonConvert.SerializeObject(ce);
+        return Encoding.UTF8.GetBytes(serialised);
+    }
+}
+```
+
+
+### `BinaryCloudEventContent<T>` ###
+
+`BinaryCloudEventContent<T>` takes either `StringEvent` or `BinaryEvent`, and store their `Data` property value into the payload. Therefore, the `StringEvent` instance converts its `Data` property value to byte array, while the `BinaryEvent` instance simply passes the `Data` property value as it is already byte array.
+
+```csharp
+public class BinaryCloudEventContent<T> : CloudEventContent<T>
+{
+    private static byte[] GetContentByteArray(CloudEvent<T> ce)
+    {
+        ...
+
+        if (ce.Data is string)
+        {
+            return Encoding.UTF8.GetBytes(ce.Data as string);
+        }
+
+        if (ce.Data is byte[])
+        {
+            return ce.Data as byte[];
+        }
+
+        var serialised = JsonConvert.SerializeObject(ce.Data);
+        return Encoding.UTF8.GetBytes(serialised);
+    }
+}
+```
 
 
 ## Contribution ##

@@ -21,12 +21,12 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(string data)
         {
-            if (!this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
+            if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
     }
 }

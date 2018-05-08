@@ -27,9 +27,17 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(byte[] data)
         {
-            if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase) ||
-                this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase) ||
-                this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+            if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return false;
+            }
+
+            if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return false;
+            }
+
+            if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
             {
                 return false;
             }
