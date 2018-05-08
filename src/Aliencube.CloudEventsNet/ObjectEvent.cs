@@ -29,13 +29,17 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(T data)
         {
-            if (!this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase) &&
-                !this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+            if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
