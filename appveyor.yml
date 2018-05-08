@@ -32,6 +32,7 @@
   before_build:
   - ps: dotnet restore CloudEvents.NET.sln
   build:
+    project: CloudEvents.NET.sln
     verbosity: minimal
 
 # release/framework
@@ -70,6 +71,7 @@
   before_build:
   - ps: dotnet restore CloudEvents.NET.sln
   build:
+    project: CloudEvents.NET.sln
     verbosity: minimal
   artifacts:
   - path: .\src\Aliencube.CloudEventsNet.Abstractions\**\*.nupkg
@@ -120,6 +122,7 @@
   before_build:
   - ps: dotnet restore CloudEvents.NET.Core.sln
   build:
+    project: CloudEvents.NET.Core.sln
     verbosity: minimal
   artifacts:
   - path: .\src\Aliencube.CloudEventsNet.Abstractions\**\*.nupkg
