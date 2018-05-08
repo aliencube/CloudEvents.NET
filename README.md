@@ -4,7 +4,11 @@ This is a .NET implementation of CloudEvents (OpenEvents) spec defined by [Cloud
 
 > Current spec of CloudEvents is the version of [`0.1`](https://github.com/cloudevents/spec).
 
-[![Build status](https://ci.appveyor.com/api/projects/status/um0krn2e8fm9femb/branch/dev?svg=true)](https://ci.appveyor.com/project/justinyoo/cloudevents-net/branch/dev)
+* [![Build status](https://ci.appveyor.com/api/projects/status/um0krn2e8fm9femb/branch/dev?svg=true)](https://ci.appveyor.com/project/justinyoo/cloudevents-net/branch/dev) [AppVeyor](https://ci.appveyor.com/project/justinyoo/cloudevents-net)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/) [`Aliencube.CloudEventsNet.Abstractions`](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Abstractions/)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet/) [`Aliencube.CloudEventsNet`](https://www.nuget.org/packages/Aliencube.CloudEventsNet/)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.Abstractions.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/) [`Aliencube.CloudEventsNet.Http.Abstractions`](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http.Abstractions/)
+* [![](https://img.shields.io/nuget/dt/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/) [![](https://img.shields.io/nuget/v/Aliencube.CloudEventsNet.Http.svg)](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/) [`Aliencube.CloudEventsNet.Http`](https://www.nuget.org/packages/Aliencube.CloudEventsNet.Http/)
 
 
 ## `Aliencube.CloudEventsNet.Abstractions` ##
