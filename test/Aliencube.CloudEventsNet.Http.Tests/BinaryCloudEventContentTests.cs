@@ -53,7 +53,7 @@ namespace Aliencube.CloudEventsNet.Http.Tests
 
             var ce = new AnotherFakeEvent();
             ce.EventType = "com.example.someevent";
-            ce.Source = new Uri("http://localhost");
+            ce.Source = (new Uri("http://localhost")).ToString();
             ce.EventId = Guid.NewGuid().ToString();
             ce.ContentType = contentType;
             ce.Data = data;
@@ -72,7 +72,7 @@ namespace Aliencube.CloudEventsNet.Http.Tests
 
             var ce = new AnotherFakeEvent();
             ce.EventType = "com.example.someevent";
-            ce.Source = new Uri("http://localhost");
+            ce.Source = (new Uri("http://localhost")).ToString();
             ce.EventId = Guid.NewGuid().ToString();
             ce.ContentType = contentType;
             ce.Data = data;

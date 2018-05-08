@@ -85,7 +85,7 @@ namespace Aliencube.CloudEventsNet.Tests
             action.Should().Throw<JsonSerializationException>();
 
             ev.EventType = null;
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
             action = () => JsonConvert.SerializeObject(ev);
             action.Should().Throw<JsonSerializationException>();
@@ -97,7 +97,7 @@ namespace Aliencube.CloudEventsNet.Tests
             action.Should().Throw<JsonSerializationException>();
 
             ev.EventType = "com.example.someevent";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = null;
             action = () => JsonConvert.SerializeObject(ev);
             action.Should().Throw<JsonSerializationException>();
@@ -109,7 +109,7 @@ namespace Aliencube.CloudEventsNet.Tests
             var ev = new BinaryEvent();
 
             ev.EventType = "com.example.someevent";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
 
             var serialised = string.Empty;
@@ -128,7 +128,7 @@ namespace Aliencube.CloudEventsNet.Tests
             var ev = new BinaryEvent();
 
             ev.EventType = "com.example.someevent";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
             ev.ContentType = "application/octet-stream";
             ev.Data = data;
