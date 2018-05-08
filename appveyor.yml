@@ -1,8 +1,8 @@
 # dev only
 -
   environment:
-    package_semantic_version_dev: 0.0.1.1
-  version: $(package_semantic_version_dev).{build}
+    package_semantic_version: 0.0.1.2
+  version: $(package_semantic_version).{build}
   branches:
     only:
     - dev
@@ -25,26 +25,25 @@
   dotnet_csproj:
     patch: true
     file: '**\*.csproj'
-    version: '$(package_semantic_version_dev)'
-    package_version: '$(package_semantic_version_dev)'
+    version: '$(package_semantic_version)'
+    package_version: '$(package_semantic_version)'
   nuget:
     disable_publish_on_pr: true
   before_build:
-  - ps: dotnet restore CloudEvents.NET.sln
+  - ps: dotnet restore
   build:
-    project: CloudEvents.NET.sln
     verbosity: minimal
 
-# release/framework
+# release/all
 -
   environment:
-    package_semantic_version_framework: 0.0.1.1
-  version: $(package_semantic_version_framework).{build}
+    package_semantic_version: 0.0.1.2
+  version: $(package_semantic_version).{build}
   pull_requests:
     do_not_increment_build_number: true
   branches:
     only:
-    - release/framework
+    - release/all
   skip_tags: true
 #  skip_commits:
 #    files:
@@ -64,65 +63,13 @@
   dotnet_csproj:
     patch: true
     file: '**\*.csproj'
-    version: '$(package_semantic_version_framework)'
-    package_version: '$(package_semantic_version_framework)'
+    version: '$(package_semantic_version)'
+    package_version: '$(package_semantic_version)'
   nuget:
     disable_publish_on_pr: true
   before_build:
-  - ps: dotnet restore CloudEvents.NET.sln
+  - ps: dotnet restore
   build:
-    project: CloudEvents.NET.sln
-    verbosity: minimal
-  artifacts:
-  - path: .\src\Aliencube.CloudEventsNet.Abstractions\**\*.nupkg
-    name: Aliencube.CloudEventsNet.Abstractions
-  - path: .\src\Aliencube.CloudEventsNet\**\*.nupkg
-    name: Aliencube.CloudEventsNet
-  - path: .\src\Aliencube.CloudEventsNet.Http.Abstractions\**\*.nupkg
-    name: Aliencube.CloudEventsNet.Http.Abstractions
-  - path: .\src\Aliencube.CloudEventsNet.Http\**\*.nupkg
-    name: Aliencube.CloudEventsNet.Http
-  deploy:
-  - provider: Environment
-    name: NuGet for CloudEvents.NET
-
-# release/core
--
-  environment:
-    package_semantic_version_core: 0.0.2.1
-  version: $(package_semantic_version_core).{build}
-  pull_requests:
-    do_not_increment_build_number: true
-  branches:
-    only:
-    - release/core
-  skip_tags: true
-#  skip_commits:
-#    files:
-#      - .editorconfig
-#      - .gitattributes
-#      - .gitignore
-#      - appveyor.yml
-#      - LICENSE
-#      - README.md
-#      - Settings.StyleCop
-#      - CloudEvents.NET.sln
-#      - CloudEvents.NET.sln.DotSettings
-#      - '**/*.csproj'
-  image: Visual Studio 2017
-  configuration: Release
-  platform: Any CPU
-  dotnet_csproj:
-    patch: true
-    file: '**\*.csproj'
-    version: '$(package_semantic_version_core)'
-    package_version: '$(package_semantic_version_core)'
-  nuget:
-    disable_publish_on_pr: true
-  before_build:
-  - ps: dotnet restore CloudEvents.NET.Core.sln
-  build:
-    project: CloudEvents.NET.Core.sln
     verbosity: minimal
   artifacts:
   - path: .\src\Aliencube.CloudEventsNet.Abstractions\**\*.nupkg
