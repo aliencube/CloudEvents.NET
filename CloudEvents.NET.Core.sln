@@ -1,0 +1,98 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B334CF00-201E-4F6D-BF5B-AABB2D7E5A0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B456A9C9-98D5-4317-8903-4DE430C72846}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FEBBAFF-6610-46F5-859A-E6A43EBA8A21}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.mailmap = .mailmap
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Core", "src\Aliencube.CloudEventsNet\Aliencube.CloudEventsNet.Core.csproj", "{DD1604EC-71EA-4EAE-AFFF-6E8E3DAEDE05}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Abstractions.Core", "src\Aliencube.CloudEventsNet.Abstractions\Aliencube.CloudEventsNet.Abstractions.Core.csproj", "{4C75A434-90A7-4D39-B72C-F00DD9846388}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Http.Core", "src\Aliencube.CloudEventsNet.Http\Aliencube.CloudEventsNet.Http.Core.csproj", "{1D05DFAC-0EC8-403C-9FA3-B4927B171ACC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Abstractions.Tests.Core", "test\Aliencube.CloudEventsNet.Abstractions.Tests\Aliencube.CloudEventsNet.Abstractions.Tests.Core.csproj", "{0FD5F516-5367-432C-8307-3FEBA9330BFF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Http.Tests.Core", "test\Aliencube.CloudEventsNet.Http.Tests\Aliencube.CloudEventsNet.Http.Tests.Core.csproj", "{3C0F5D93-5132-4821-AE71-31528BDA2759}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Tests.Core", "test\Aliencube.CloudEventsNet.Tests\Aliencube.CloudEventsNet.Tests.Core.csproj", "{F22C0C07-4230-453F-86F2-795A0B34A3BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Tests.Common.Core", "test\Aliencube.CloudEventsNet.Tests.Common\Aliencube.CloudEventsNet.Tests.Common.Core.csproj", "{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Http.Abstractions.Core", "src\Aliencube.CloudEventsNet.Http.Abstractions\Aliencube.CloudEventsNet.Http.Abstractions.Core.csproj", "{690A70CF-18BA-4B89-85C6-2CD47179D9E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aliencube.CloudEventsNet.Http.Abstractions.Tests.Core", "test\Aliencube.CloudEventsNet.Http.Abstractions.Tests\Aliencube.CloudEventsNet.Http.Abstractions.Tests.Core.csproj", "{B9ADE2BC-852F-474A-A487-3FA27F877E1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD1604EC-71EA-4EAE-AFFF-6E8E3DAEDE05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1604EC-71EA-4EAE-AFFF-6E8E3DAEDE05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1604EC-71EA-4EAE-AFFF-6E8E3DAEDE05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1604EC-71EA-4EAE-AFFF-6E8E3DAEDE05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C75A434-90A7-4D39-B72C-F00DD9846388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C75A434-90A7-4D39-B72C-F00DD9846388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C75A434-90A7-4D39-B72C-F00DD9846388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C75A434-90A7-4D39-B72C-F00DD9846388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D05DFAC-0EC8-403C-9FA3-B4927B171ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D05DFAC-0EC8-403C-9FA3-B4927B171ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D05DFAC-0EC8-403C-9FA3-B4927B171ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D05DFAC-0EC8-403C-9FA3-B4927B171ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD5F516-5367-432C-8307-3FEBA9330BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FD5F516-5367-432C-8307-3FEBA9330BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FD5F516-5367-432C-8307-3FEBA9330BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FD5F516-5367-432C-8307-3FEBA9330BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0F5D93-5132-4821-AE71-31528BDA2759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0F5D93-5132-4821-AE71-31528BDA2759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0F5D93-5132-4821-AE71-31528BDA2759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0F5D93-5132-4821-AE71-31528BDA2759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22C0C07-4230-453F-86F2-795A0B34A3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22C0C07-4230-453F-86F2-795A0B34A3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22C0C07-4230-453F-86F2-795A0B34A3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22C0C07-4230-453F-86F2-795A0B34A3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690A70CF-18BA-4B89-85C6-2CD47179D9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690A70CF-18BA-4B89-85C6-2CD47179D9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690A70CF-18BA-4B89-85C6-2CD47179D9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690A70CF-18BA-4B89-85C6-2CD47179D9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9ADE2BC-852F-474A-A487-3FA27F877E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD1604EC-71EA-4EAE-AFFF-6E8E3DAEDE05} = {B334CF00-201E-4F6D-BF5B-AABB2D7E5A0A}
+		{4C75A434-90A7-4D39-B72C-F00DD9846388} = {B334CF00-201E-4F6D-BF5B-AABB2D7E5A0A}
+		{1D05DFAC-0EC8-403C-9FA3-B4927B171ACC} = {B334CF00-201E-4F6D-BF5B-AABB2D7E5A0A}
+		{0FD5F516-5367-432C-8307-3FEBA9330BFF} = {B456A9C9-98D5-4317-8903-4DE430C72846}
+		{3C0F5D93-5132-4821-AE71-31528BDA2759} = {B456A9C9-98D5-4317-8903-4DE430C72846}
+		{F22C0C07-4230-453F-86F2-795A0B34A3BF} = {B456A9C9-98D5-4317-8903-4DE430C72846}
+		{9EDF4AA3-D321-4B00-AB07-54EBCC7C17E6} = {B456A9C9-98D5-4317-8903-4DE430C72846}
+		{690A70CF-18BA-4B89-85C6-2CD47179D9E1} = {B334CF00-201E-4F6D-BF5B-AABB2D7E5A0A}
+		{B9ADE2BC-852F-474A-A487-3FA27F877E1A} = {B456A9C9-98D5-4317-8903-4DE430C72846}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EBA2954-9B5E-4B91-91C0-D81CE12CF573}
+	EndGlobalSection
+EndGlobal

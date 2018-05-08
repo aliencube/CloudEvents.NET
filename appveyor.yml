@@ -30,7 +30,7 @@
   nuget:
     disable_publish_on_pr: true
   before_build:
-  - ps: dotnet restore
+  - ps: dotnet restore CloudEvents.NET.sln
   build:
     verbosity: minimal
 
@@ -68,7 +68,7 @@
   nuget:
     disable_publish_on_pr: true
   before_build:
-  - ps: dotnet restore
+  - ps: dotnet restore CloudEvents.NET.sln
   build:
     verbosity: minimal
   artifacts:
@@ -118,7 +118,7 @@
   nuget:
     disable_publish_on_pr: true
   before_build:
-  - ps: dotnet restore
+  - ps: dotnet restore CloudEvents.NET.Core.sln
   build:
     verbosity: minimal
   artifacts:
