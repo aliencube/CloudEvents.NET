@@ -1,7 +1,7 @@
 # dev only
 -
   environment:
-    package_semantic_version: 0.0.1
+    package_semantic_version: 0.0.1.2
   version: $(package_semantic_version).{build}
   branches:
     only:
@@ -25,8 +25,8 @@
   dotnet_csproj:
     patch: true
     file: '**\*.csproj'
-    version: '$(package_semantic_version).0'
-    package_version: '$(package_semantic_version).0'
+    version: '$(package_semantic_version)'
+    package_version: '$(package_semantic_version)'
   nuget:
     disable_publish_on_pr: true
   before_build:
@@ -34,10 +34,10 @@
   build:
     verbosity: minimal
 
-# release Only
+# release/all
 -
   environment:
-    package_semantic_version: 0.0.1
+    package_semantic_version: 0.0.1.2
   version: $(package_semantic_version).{build}
   pull_requests:
     do_not_increment_build_number: true
@@ -63,8 +63,8 @@
   dotnet_csproj:
     patch: true
     file: '**\*.csproj'
-    version: '$(package_semantic_version).0'
-    package_version: '$(package_semantic_version).0'
+    version: '$(package_semantic_version)'
+    package_version: '$(package_semantic_version)'
   nuget:
     disable_publish_on_pr: true
   before_build:

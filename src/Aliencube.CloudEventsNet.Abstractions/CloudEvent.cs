@@ -61,7 +61,7 @@ namespace Aliencube.CloudEventsNet.Abstractions
         /// </list>
         /// </remarks>
         [JsonProperty("source", Required = Required.Always)]
-        public virtual Uri Source { get; set; }
+        public virtual string Source { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the event. The semantics of this string are explicitly undefined to ease the implementation of producers. Enables deduplication.

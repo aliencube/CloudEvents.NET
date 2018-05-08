@@ -40,7 +40,7 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions.Tests
             var ev = new AnotherFakeEvent();
             ev.EventType = "com.example.someevent";
             ev.CloudEventsVersion = "0.1";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
             ev.Data = data;
 
@@ -60,7 +60,7 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions.Tests
             var ev = new AnotherFakeEvent();
             ev.EventType = "com.example.someevent";
             ev.CloudEventsVersion = "0.1";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
             ev.Data = data;
 
@@ -87,7 +87,7 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions.Tests
             var ev = new AnotherFakeEvent();
             ev.EventType = "com.example.someevent";
             ev.CloudEventsVersion = "0.1";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
             ev.Data = data;
 
@@ -109,7 +109,7 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions.Tests
             var ev = new AnotherFakeEvent();
             ev.EventType = "com.example.someevent";
             ev.CloudEventsVersion = "0.1";
-            ev.Source = new Uri("http://localhost");
+            ev.Source = (new Uri("http://localhost")).ToString();
             ev.EventId = Guid.NewGuid().ToString();
             ev.Data = data;
             ev.Extensions = new Dictionary<string, object>() { { "key1", "value1" } };
