@@ -37,6 +37,16 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(T data)
         {
+            if (data.GetType() == typeof(string))
+            {
+                return false;
+            }
+
+            if (data.GetType() == typeof(byte[]))
+            {
+                return false;
+            }
+
             var lowered = this.ContentType.ToLowerInvariant();
 
             if (lowered.StartsWith("application/json"))

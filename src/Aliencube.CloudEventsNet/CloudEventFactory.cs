@@ -23,17 +23,23 @@ namespace Aliencube.CloudEventsNet
 
             if (lowered.StartsWith("application/json"))
             {
-                return new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
+                var objectEventised = new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
+
+                return objectEventised;
             }
 
             if (lowered.Contains("+json"))
             {
-                return new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
+                var objectEventised = new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
+
+                return objectEventised;
             }
 
             if (lowered.StartsWith("text/json"))
             {
-                return new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
+                var objectEventised = new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
+
+                return objectEventised;
             }
 
             if (lowered.StartsWith("text/"))
