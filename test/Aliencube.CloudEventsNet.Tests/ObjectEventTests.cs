@@ -23,6 +23,24 @@ namespace Aliencube.CloudEventsNet.Tests
         }
 
         [TestMethod]
+        public void Given_NoType_Should_BeDerivedFrom()
+        {
+            var ev = new ObjectEvent();
+
+            ev.GetType().Should().BeDerivedFrom<CloudEvent<object>>();
+        }
+
+        [TestMethod]
+        public void Given_InvalidType_Should_ThrowException()
+        {
+            Action action = () => new ObjectEvent<string>();
+            action.Should().Throw<TypeArgumentException>();
+
+            action = () => new ObjectEvent<byte[]>();
+            action.Should().Throw<TypeArgumentException>();
+        }
+
+        [TestMethod]
         public void Given_NoVersion_Should_HaveDefaultCloudEventsVersion()
         {
             var ev = new ObjectEvent<FakeData>();
@@ -46,8 +64,8 @@ namespace Aliencube.CloudEventsNet.Tests
             var data = new FakeData() { FakeProperty = "hello world" };
 
             var ev = new ObjectEvent<FakeData>();
+            ev.ContentType = "text/xml";
 
-            ev.ContentType = "text/json";
             Action action = () => ev.Data = data;
             action.Should().Throw<InvalidDataTypeException>();
         }
@@ -59,9 +77,24 @@ namespace Aliencube.CloudEventsNet.Tests
 
             var ev = new ObjectEvent<FakeData>();
 
+            ev.ContentType = "text/json";
+            ev.Data = data;
+            ev.Data.Should().Be(data);
+
             ev.ContentType = "application/json";
             ev.Data = data;
+            ev.Data.Should().Be(data);
 
+            ev.ContentType = "application/json-seq";
+            ev.Data = data;
+            ev.Data.Should().Be(data);
+
+            ev.ContentType = "application/cloudevents+json";
+            ev.Data = data;
+            ev.Data.Should().Be(data);
+
+            ev.ContentType = "application/geo+json-seq";
+            ev.Data = data;
             ev.Data.Should().Be(data);
         }
 

@@ -45,8 +45,12 @@ namespace Aliencube.CloudEventsNet.Tests
 
             var ev = new StringEvent();
 
-            ev.ContentType = "application/json";
+            ev.ContentType = "text/json";
             Action action = () => ev.Data = data;
+            action.Should().Throw<InvalidDataTypeException>();
+
+            ev.ContentType = "application/json";
+            action = () => ev.Data = data;
             action.Should().Throw<InvalidDataTypeException>();
         }
 
