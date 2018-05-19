@@ -23,12 +23,12 @@ namespace Aliencube.CloudEventsNet
         {
             this.CloudEventsVersion = cloudEventsVersion;
 
-            if (typeof(T) == typeof(string))
+            if (ContentTypeValidator.IsTypeString(typeof(T)))
             {
                 throw new TypeArgumentException();
             }
 
-            if (typeof(T) == typeof(byte[]))
+            if (ContentTypeValidator.IsTypeByteArray(typeof(T)))
             {
                 throw new TypeArgumentException();
             }
@@ -37,29 +37,27 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(T data)
         {
-            if (data.GetType() == typeof(string))
+            if (ContentTypeValidator.IsDataString<T>(data))
             {
                 return false;
             }
 
-            if (data.GetType() == typeof(byte[]))
+            if (ContentTypeValidator.IsDataByteArray<T>(data))
             {
                 return false;
             }
 
-            var lowered = this.ContentType.ToLowerInvariant();
-
-            if (lowered.StartsWith("application/json"))
+            if (ContentTypeValidator.IsJson(this.ContentType))
             {
                 return true;
             }
 
-            if (lowered.Contains("+json"))
+            if (ContentTypeValidator.HasJsonSuffix(this.ContentType))
             {
                 return true;
             }
 
-            if (lowered.StartsWith("text/json"))
+            if (ContentTypeValidator.ImpliesJson(this.ContentType))
             {
                 return true;
             }

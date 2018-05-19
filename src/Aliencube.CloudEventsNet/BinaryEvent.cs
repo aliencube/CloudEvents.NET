@@ -27,22 +27,22 @@ namespace Aliencube.CloudEventsNet
         {
             var lowered = this.ContentType.ToLowerInvariant();
 
-            if (lowered.StartsWith("application/json"))
+            if (ContentTypeValidator.IsJson(this.ContentType))
             {
                 return false;
             }
 
-            if (lowered.Contains("+json"))
+            if (ContentTypeValidator.HasJsonSuffix(this.ContentType))
             {
                 return false;
             }
 
-            if (lowered.StartsWith("text/json"))
+            if (ContentTypeValidator.ImpliesJson(this.ContentType))
             {
                 return false;
             }
 
-            if (lowered.StartsWith("text/"))
+            if (ContentTypeValidator.IsText(this.ContentType))
             {
                 return false;
             }

@@ -19,14 +19,12 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(string data)
         {
-            var lowered = this.ContentType.ToLowerInvariant();
-
-            if (lowered.StartsWith("text/json"))
+            if (ContentTypeValidator.ImpliesJson(this.ContentType))
             {
                 return false;
             }
 
-            if (lowered.StartsWith("text/"))
+            if (ContentTypeValidator.IsText(this.ContentType))
             {
                 return true;
             }
