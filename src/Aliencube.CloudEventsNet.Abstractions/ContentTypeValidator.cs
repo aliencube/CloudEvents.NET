@@ -64,7 +64,7 @@ namespace Aliencube.CloudEventsNet.Abstractions
         /// <returns>Returns <c>True</c>, if the content type indicates JSON; otherwise returns <c>False</c>.</returns>
         public static bool IsJson(string contentType)
         {
-            var result = contentType.ToLowerInvariant().StartsWith("application/json");
+            var result = contentType.StartsWith("application/json", StringComparison.CurrentCultureIgnoreCase);
 
             return result;
         }
@@ -88,7 +88,7 @@ namespace Aliencube.CloudEventsNet.Abstractions
         /// <returns>Returns <c>True</c>, if the content type implies JSON; otherwise returns <c>False</c>.</returns>
         public static bool ImpliesJson(string contentType)
         {
-            var result = contentType.ToLowerInvariant().StartsWith("text/json");
+            var result = contentType.StartsWith("text/json", StringComparison.CurrentCultureIgnoreCase);
 
             return result;
         }
@@ -100,7 +100,7 @@ namespace Aliencube.CloudEventsNet.Abstractions
         /// <returns>Returns <c>True</c>, if the content type indicates text; otherwise returns <c>False</c>.</returns>
         public static bool IsText(string contentType)
         {
-            var result = contentType.ToLowerInvariant().StartsWith("text/");
+            var result = contentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase);
 
             return result;
         }

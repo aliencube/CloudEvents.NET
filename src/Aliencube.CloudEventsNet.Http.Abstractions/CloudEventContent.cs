@@ -22,6 +22,8 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions
         private const string CeEventTimeHeaderKey = "CE-EventTime";
         private const string CeSchemaUrlHeaderKey = "CE-SchemaUrl";
 
+        private const string TimestampFormat = "yyyy-MM-ddTHH:mm:ss.fffffffzzz";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CloudEventContent{T}"/> class.
         /// </summary>
@@ -46,12 +48,17 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions
         /// <returns>Returns <c>True</c>, if the content type indicates structured; otherwise returns <c>False</c>.</returns>
         protected static bool IsStructuredCloudEventContentType(CloudEvent<T> ce)
         {
-            if (ce.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.IsJson(ce.ContentType))
             {
                 return true;
             }
 
-            if (ce.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.HasJsonSuffix(ce.ContentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.ImpliesJson(ce.ContentType))
             {
                 return true;
             }
@@ -91,7 +98,7 @@ namespace Aliencube.CloudEventsNet.Http.Abstractions
 
             if (this.CloudEvent.EventTime.HasValue)
             {
-                this.Headers.Add(CeEventTimeHeaderKey.ToUpperInvariant(), this.CloudEvent.EventTime.Value.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz"));
+                this.Headers.Add(CeEventTimeHeaderKey.ToUpperInvariant(), this.CloudEvent.EventTime.Value.ToString(TimestampFormat));
             }
 
             if (this.CloudEvent.SchemaUrl != null)
