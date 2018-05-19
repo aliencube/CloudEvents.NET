@@ -1,6 +1,4 @@
-﻿using System;
-
-using Aliencube.CloudEventsNet.Abstractions;
+﻿using Aliencube.CloudEventsNet.Abstractions;
 
 namespace Aliencube.CloudEventsNet
 {
@@ -19,30 +17,14 @@ namespace Aliencube.CloudEventsNet
         /// <returns>Returns the <see cref="CloudEvent{T}"/> instance created.</returns>
         public static CloudEvent<T> Create<T>(string contentType, T data, string cloudEventsVersion = CloudEventsVersion.Version01)
         {
-            var lowered = contentType.ToLowerInvariant();
-
-            if (lowered.StartsWith("application/json"))
+            if (IsJson(contentType))
             {
                 var objectEventised = new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
 
                 return objectEventised;
             }
 
-            if (lowered.Contains("+json"))
-            {
-                var objectEventised = new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
-
-                return objectEventised;
-            }
-
-            if (lowered.StartsWith("text/json"))
-            {
-                var objectEventised = new ObjectEvent<T>(cloudEventsVersion) { ContentType = contentType, Data = data };
-
-                return objectEventised;
-            }
-
-            if (lowered.StartsWith("text/"))
+            if (ContentTypeValidator.IsText(contentType))
             {
                 var stringified = data as string;
                 var stringEventised = new StringEvent(cloudEventsVersion) { ContentType = contentType, Data = stringified };
@@ -54,6 +36,26 @@ namespace Aliencube.CloudEventsNet
             var binaryEventised = new BinaryEvent(cloudEventsVersion) { ContentType = contentType, Data = binarified };
 
             return binaryEventised as CloudEvent<T>;
+        }
+
+        private static bool IsJson(string contentType)
+        {
+            if (ContentTypeValidator.IsJson(contentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.HasJsonSuffix(contentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.ImpliesJson(contentType))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
