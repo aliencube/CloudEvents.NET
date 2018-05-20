@@ -9,7 +9,7 @@
     <Owners>Aliencube</Owners>
     <Authors>Justin Yoo</Authors>
     <Company>Aliencube Community</Company>
-    <Version>0.0.1.2</Version>
+    <Version>0.1.0.0</Version>
     <Title>Aliencube.CloudEventsNet.Http.Abstractions</Title>
     <Product>Aliencube.CloudEventsNet.Http.Abstractions</Product>
     <Summary>This package is a .NET implementation of CloudEvents defined by https://cloudevents.io</Summary>
