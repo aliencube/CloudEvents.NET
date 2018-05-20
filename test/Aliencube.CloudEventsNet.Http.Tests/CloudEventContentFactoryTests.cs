@@ -41,7 +41,6 @@ namespace Aliencube.CloudEventsNet.Http.Tests
         public void Given_CloudEvent_Should_Return_StructuredCloudEventContent()
         {
             var contentType = "application/json";
-            var charset = "utf-8";
             var data = new FakeData() { FakeProperty = "hello world" };
 
             var ce = new TheOtherFakeEvent();
@@ -61,7 +60,6 @@ namespace Aliencube.CloudEventsNet.Http.Tests
         public void Given_CloudEvent_Should_Return_BinaryCloudEventContent()
         {
             var contentType = "text/plain";
-            var charset = "utf-8";
             var data = "hello world";
 
             var ce = new AnotherFakeEvent();
