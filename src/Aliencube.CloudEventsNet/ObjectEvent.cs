@@ -1,6 +1,4 @@
-﻿using System;
-
-using Aliencube.CloudEventsNet.Abstractions;
+﻿using Aliencube.CloudEventsNet.Abstractions;
 
 namespace Aliencube.CloudEventsNet
 {
@@ -15,7 +13,7 @@ namespace Aliencube.CloudEventsNet
     /// This represents the CloudEvent entity containing object data.
     /// </summary>
     /// <typeparam name="T">Type of data object.</typeparam>
-    public class ObjectEvent<T> : CloudEvent<T> where T : class
+    public class ObjectEvent<T> : CloudEvent<T>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectEvent"/> class.
@@ -24,17 +22,42 @@ namespace Aliencube.CloudEventsNet
         public ObjectEvent(string cloudEventsVersion = CloudEventsNet.CloudEventsVersion.Version01)
         {
             this.CloudEventsVersion = cloudEventsVersion;
+
+            if (ContentTypeValidator.IsTypeString(typeof(T)))
+            {
+                throw new TypeArgumentException();
+            }
+
+            if (ContentTypeValidator.IsTypeByteArray(typeof(T)))
+            {
+                throw new TypeArgumentException();
+            }
         }
 
         /// <inheritdoc />
         protected override bool IsValidDataType(T data)
         {
-            if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.IsDataString<T>(data))
+            {
+                return false;
+            }
+
+            if (ContentTypeValidator.IsDataByteArray<T>(data))
+            {
+                return false;
+            }
+
+            if (ContentTypeValidator.IsJson(this.ContentType))
             {
                 return true;
             }
 
-            if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.HasJsonSuffix(this.ContentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.ImpliesJson(this.ContentType))
             {
                 return true;
             }

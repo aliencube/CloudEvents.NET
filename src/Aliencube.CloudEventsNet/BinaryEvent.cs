@@ -1,6 +1,4 @@
-﻿using System;
-
-using Aliencube.CloudEventsNet.Abstractions;
+﻿using Aliencube.CloudEventsNet.Abstractions;
 
 using Newtonsoft.Json;
 
@@ -27,17 +25,24 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(byte[] data)
         {
-            if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
+            var lowered = this.ContentType.ToLowerInvariant();
+
+            if (ContentTypeValidator.IsJson(this.ContentType))
             {
                 return false;
             }
 
-            if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.HasJsonSuffix(this.ContentType))
             {
                 return false;
             }
 
-            if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.ImpliesJson(this.ContentType))
+            {
+                return false;
+            }
+
+            if (ContentTypeValidator.IsText(this.ContentType))
             {
                 return false;
             }

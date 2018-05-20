@@ -51,11 +51,23 @@ namespace Aliencube.CloudEventsNet.Tests
             Action action = () => ev.Data = data;
             action.Should().Throw<InvalidDataTypeException>();
 
+            ev.ContentType = "text/json";
+            action = () => ev.Data = data;
+            action.Should().Throw<InvalidDataTypeException>();
+
             ev.ContentType = "application/json";
             action = () => ev.Data = data;
             action.Should().Throw<InvalidDataTypeException>();
 
+            ev.ContentType = "application/json-seq";
+            action = () => ev.Data = data;
+            action.Should().Throw<InvalidDataTypeException>();
+
             ev.ContentType = "application/cloudevents+json";
+            action = () => ev.Data = data;
+            action.Should().Throw<InvalidDataTypeException>();
+
+            ev.ContentType = "application/geo+json-seq";
             action = () => ev.Data = data;
             action.Should().Throw<InvalidDataTypeException>();
         }

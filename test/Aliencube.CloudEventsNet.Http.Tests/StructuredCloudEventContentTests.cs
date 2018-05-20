@@ -64,7 +64,6 @@ namespace Aliencube.CloudEventsNet.Http.Tests
         public async Task Given_Parameter_When_Instantiated_Should_HaveContent()
         {
             var contentType = "application/json";
-            var charset = "utf-8";
             var data = new FakeData() { FakeProperty = "hello world" };
 
             var ce = new TheOtherFakeEvent();

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Aliencube.CloudEventsNet.Abstractions;
+﻿using Aliencube.CloudEventsNet.Abstractions;
 
 namespace Aliencube.CloudEventsNet
 {
@@ -21,7 +19,12 @@ namespace Aliencube.CloudEventsNet
         /// <inheritdoc />
         protected override bool IsValidDataType(string data)
         {
-            if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
+            if (ContentTypeValidator.ImpliesJson(this.ContentType))
+            {
+                return false;
+            }
+
+            if (ContentTypeValidator.IsText(this.ContentType))
             {
                 return true;
             }

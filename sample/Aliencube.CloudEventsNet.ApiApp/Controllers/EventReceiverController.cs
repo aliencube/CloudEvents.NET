@@ -15,7 +15,7 @@ namespace Aliencube.CloudEventsNet.ApiApp.Controllers
         {
             var response = new { Headers = this.Request.Headers, Body = payload };
 
-            return new OkObjectResult(response);
+            return await Task.FromResult(new OkObjectResult(response)).ConfigureAwait(false);
         }
     }
 }
