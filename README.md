@@ -25,84 +25,56 @@ This defines interfaces and abstract classes for CloudEvents based on the [Cloud
 This implements CloudEvents based on the [CloudEvents spec](https://github.com/cloudevents/spec/blob/master/spec.md). According to the spec, the `data` property of the CloudEvent payload can be either `string`, `binary` (base-64 encoded string) or `object`. Therfore, the actual implementation also has three different types, `StringEvent`, `BinaryEvent` and `ObjectEvent` respectively. Each event object has its own distinctive content type.
 
 
-### ObjectEvent ###
+### `ObjectEvent` or `ObjectEvent<T>` ###
 
-`ObjectEvent` or `ObjectEvent<T>` object only takes care of the content type of `application/json` or of having suffix of `+json`. Therefore, the implementation has the validation logic like below:
+`ObjectEvent` or `ObjectEvent<T>` object takes care of the content type of `application/json` or of having suffix of `+json`. If the content type implies the data format of JSON, the `ObjectEvent<T>` also takes care of it.
 
 ```csharp
-public class ObjectEvent<T> : CloudEvent<T> where T : class
-{
-    ...
+var todo = new ToDo() { Title = "My Todo" };
 
-    protected override bool IsValidDataType(T data)
-    {
-        if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return true;
-        }
-
-        if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return true;
-        }
-
-        return false;
-    }
-}
+var ev = new ObjectEvent<ToDo>();
+ev.ContentType = "application/json";
+ev.Data = todo;
+...
 ```
 
 
-### StringEvent ###
+### `StringEvent` ###
 
-`StringEvent` object only takes care of string content types, which is basically of all MIME type starting with `text/`. Therefore, the implementation has the validation logic like below:
+`StringEvent` object only takes care of string content types, which is basically of all MIME type starting with `text/`, except `text/json`.
 
 ```csharp
-public class StringEvent : CloudEvent<string>
-{
-    ...
-
-    protected override bool IsValidDataType(string data)
-    {
-        if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return true;
-        }
-
-        return false;
-    }
-}
+var todo = "<todo>My Todo</todo>";
+var ev = new StringEvent();
+ev.ContentType = "text/xml";
+ev.Data = todo;
+...
 ```
 
 
-### BinaryEvent ###
+### `BinaryEvent` ###
 
-`BinaryEvent` object takes care of the rest of all content types. Therefore, the implementation has the validation logic like below:
+`BinaryEvent` object takes care of the rest of all content types.
 
 ```csharp
-public class BinaryEvent : CloudEvent<byte[]>
-{
-    ...
+var todo = "My ToDo";
+var ev = new BinaryEvent();
+ev.ContentType = "application/octet-stream";
+ev.Data = Encoding.UTF8.GetBytes(todo);
+...
+```
 
-    protected override bool IsValidDataType(byte[] data)
-    {
-        if (this.ContentType.StartsWith("text/", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return false;
-        }
 
-        if (this.ContentType.Equals("application/json", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return false;
-        }
+### `CloudEventFactory` ###
 
-        if (this.ContentType.EndsWith("+json", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return false;
-        }
+Instead of directly instantiating a `CloudEvent<T>` object, you can use the factory method like:
 
-        return true;
-    }
-}
+```csharp
+var todo = new ToDo() { Title = "My Todo" };
+var contentType = "application/json";
+
+var ev = CloudEventFactory.Create(contentType, todo);
+...
 ```
 
 
@@ -122,48 +94,32 @@ This implements CloudEvents [transported over HTTP](https://github.com/cloudeven
 
 ### `StructuredCloudEventContent<T>` ###
 
-`StructuredCloudEventContent<T>` takes only `ObjectEvent`, and store the entire `ObjectEvent` instance into the payload. Therefore, the `ObjectEvent` instance itself is serialised and converted to byte array.
-
-```csharp
-public class StructuredCloudEventContent<T> : CloudEventContent<T>
-{
-    ...
-
-    private static byte[] GetContentByteArray(CloudEvent<T> ce)
-    {
-        ...
-        var serialised = JsonConvert.SerializeObject(ce);
-        return Encoding.UTF8.GetBytes(serialised);
-    }
-}
-```
+`StructuredCloudEventContent<T>` takes only `ObjectEvent`, and store the entire `ObjectEvent` instance into the payload. Therefore, the `ObjectEvent` instance itself is serialised and converted to byte array. All properties other than `Data` are also stored into the request/response header.
 
 
 ### `BinaryCloudEventContent<T>` ###
 
-`BinaryCloudEventContent<T>` takes either `StringEvent` or `BinaryEvent`, and store their `Data` property value into the payload. Therefore, the `StringEvent` instance converts its `Data` property value to byte array, while the `BinaryEvent` instance simply passes the `Data` property value as it is already byte array.
+`BinaryCloudEventContent<T>` takes either `StringEvent` or `BinaryEvent`, and store only their `Data` property value into the payload. Therefore, the `StringEvent` instance converts its `Data` property value to byte array, while the `BinaryEvent` instance simply passes the `Data` property value as it is already byte array. All other properties are stored into the request/response header.
+
+
+### `CloudEventContentFactory` ###
+
+Instead of directly instantiating the `CloudEventContent<T>` object, you can use the factory method like:
 
 ```csharp
-public class BinaryCloudEventContent<T> : CloudEventContent<T>
-{
-    private static byte[] GetContentByteArray(CloudEvent<T> ce)
-    {
-        ...
+var todo = new ToDo() { Title = "My Todo" };
+var contentType = "application/json";
 
-        if (ce.Data is string)
-        {
-            return Encoding.UTF8.GetBytes(ce.Data as string);
-        }
+var ev = CloudEventFactory.Create(contentType, todo);
+ev.EventType = "org.aliencube.ToDos.OnToDoCreated";
+...
 
-        if (ce.Data is byte[])
-        {
-            return ce.Data as byte[];
-        }
+var requestUri = "https://localhost:443/path/to";
+var client = new HttpClient();
 
-        var serialised = JsonConvert.SerializeObject(ce.Data);
-        return Encoding.UTF8.GetBytes(serialised);
-    }
-}
+var content = CloudEventContentFactory.Create(ev);
+var response = await client.PostAsync(requestUri, content).ConfigureAwait(false);
+...
 ```
 
 
