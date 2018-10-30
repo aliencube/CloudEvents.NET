@@ -59,15 +59,27 @@ namespace Aliencube.CloudEventsNet.Tests
         }
 
         [TestMethod]
-        public void Given_InvalidContentType_When_DataIsSet_Should_ThrowException()
+        public void Given_InvalidContentType_Should_ThrowException()
         {
             var data = new FakeData() { FakeProperty = "hello world" };
 
             var ev = new ObjectEvent<FakeData>();
-            ev.ContentType = "text/xml";
 
-            Action action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            Action action = () => ev.ContentType = "text/xml";
+
+            action.Should().Throw<InvalidContentTypeException>();
+        }
+
+        [TestMethod]
+        public void Given_NoContentType_When_DataIsSet_Should_BeOk()
+        {
+            var data = new FakeData() { FakeProperty = "hello world" };
+
+            var ev = new ObjectEvent<FakeData>();
+            ev.ContentType = null;
+            ev.Data = data;
+
+            ev.Data.Should().Be(data);
         }
 
         [TestMethod]

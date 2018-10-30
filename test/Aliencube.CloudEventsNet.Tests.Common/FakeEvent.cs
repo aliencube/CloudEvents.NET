@@ -8,6 +8,12 @@ namespace Aliencube.CloudEventsNet.Tests.Common
     public class FakeEvent : CloudEvent<bool>
     {
         /// <inheritdoc />
+        protected override bool IsValidContentType(string contentType)
+        {
+            return contentType == "text/plain";
+        }
+
+        /// <inheritdoc />
         protected override bool IsValidDataType(bool data)
         {
             return data;
@@ -20,6 +26,12 @@ namespace Aliencube.CloudEventsNet.Tests.Common
     public class AnotherFakeEvent : CloudEvent<string>
     {
         /// <inheritdoc />
+        protected override bool IsValidContentType(string contentType)
+        {
+            return !string.IsNullOrWhiteSpace(contentType);
+        }
+
+        /// <inheritdoc />
         protected override bool IsValidDataType(string data)
         {
             return true;
@@ -31,6 +43,12 @@ namespace Aliencube.CloudEventsNet.Tests.Common
     /// </summary>
     public class TheOtherFakeEvent : CloudEvent<FakeData>
     {
+        /// <inheritdoc />
+        protected override bool IsValidContentType(string contentType)
+        {
+            return !string.IsNullOrWhiteSpace(contentType);
+        }
+
         /// <inheritdoc />
         protected override bool IsValidDataType(FakeData data)
         {

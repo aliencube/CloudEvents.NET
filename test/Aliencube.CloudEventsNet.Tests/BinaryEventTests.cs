@@ -47,29 +47,38 @@ namespace Aliencube.CloudEventsNet.Tests
 
             var ev = new BinaryEvent();
 
-            ev.ContentType = "text/plain";
-            Action action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            Action action = () => ev.ContentType = "text/plain";
+            action.Should().Throw<InvalidContentTypeException>();
 
-            ev.ContentType = "text/json";
-            action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            action = () => ev.ContentType = "text/json";
+            action.Should().Throw<InvalidContentTypeException>();
 
-            ev.ContentType = "application/json";
-            action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            action = () => ev.ContentType = "application/json";
+            action.Should().Throw<InvalidContentTypeException>();
 
-            ev.ContentType = "application/json-seq";
-            action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            action = () => ev.ContentType = "application/json-seq";
+            action.Should().Throw<InvalidContentTypeException>();
 
-            ev.ContentType = "application/cloudevents+json";
-            action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            action = () => ev.ContentType = "application/cloudevents+json";
+            action.Should().Throw<InvalidContentTypeException>();
 
-            ev.ContentType = "application/geo+json-seq";
-            action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            action = () => ev.ContentType = "application/geo+json-seq";
+            action.Should().Throw<InvalidContentTypeException>();
+        }
+
+        [TestMethod]
+        public void Given_NoContentType_When_DataIsSet_Should_BeOk()
+        {
+            var content = "hello world";
+            var data = Encoding.UTF8.GetBytes(content);
+
+            var ev = new BinaryEvent();
+            ev.ContentType = null;
+            ev.Data = data;
+
+            var result = Encoding.UTF8.GetString(ev.Data);
+
+            result.Should().Be(content);
         }
 
         [TestMethod]
