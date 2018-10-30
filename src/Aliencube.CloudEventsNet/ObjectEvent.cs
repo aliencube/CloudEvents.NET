@@ -7,6 +7,15 @@ namespace Aliencube.CloudEventsNet
     /// </summary>
     public class ObjectEvent : ObjectEvent<object>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ObjectEvent"/> class.
+        /// </summary>
+        /// <param name="cloudEventsVersion"><see cref="CloudEventsVersion"/> value.</param>
+        /// <param name="contentType">Content type value. Default is <c>application/cloudevents+json</c>.</param>
+        public ObjectEvent(string cloudEventsVersion = CloudEventsNet.CloudEventsVersion.Version01, string contentType = "application/cloudevents+json")
+            : base(cloudEventsVersion, contentType)
+        {
+        }
     }
 
     /// <summary>
@@ -16,12 +25,14 @@ namespace Aliencube.CloudEventsNet
     public class ObjectEvent<T> : CloudEvent<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectEvent"/> class.
+        /// Initializes a new instance of the <see cref="ObjectEvent{T}"/> class.
         /// </summary>
         /// <param name="cloudEventsVersion"><see cref="CloudEventsVersion"/> value.</param>
-        public ObjectEvent(string cloudEventsVersion = CloudEventsNet.CloudEventsVersion.Version01)
+        /// <param name="contentType">Content type value. Default is "application/cloudevents+json".</param>
+        public ObjectEvent(string cloudEventsVersion = CloudEventsNet.CloudEventsVersion.Version01, string contentType = "application/cloudevents+json")
         {
             this.CloudEventsVersion = cloudEventsVersion;
+            this.ContentType = contentType;
 
             if (ContentTypeValidator.IsTypeString(typeof(T)))
             {
@@ -35,6 +46,32 @@ namespace Aliencube.CloudEventsNet
         }
 
         /// <inheritdoc />
+        protected override bool IsValidContentType(string contentType)
+        {
+            if (string.IsNullOrWhiteSpace(contentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.IsJson(contentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.HasJsonSuffix(contentType))
+            {
+                return true;
+            }
+
+            if (ContentTypeValidator.ImpliesJson(contentType))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc />
         protected override bool IsValidDataType(T data)
         {
             if (ContentTypeValidator.IsDataString<T>(data))
@@ -45,6 +82,12 @@ namespace Aliencube.CloudEventsNet
             if (ContentTypeValidator.IsDataByteArray<T>(data))
             {
                 return false;
+            }
+
+            // Returns true because there is no content type defined for comparison.
+            if (string.IsNullOrWhiteSpace(this.ContentType))
+            {
+                return true;
             }
 
             if (ContentTypeValidator.IsJson(this.ContentType))

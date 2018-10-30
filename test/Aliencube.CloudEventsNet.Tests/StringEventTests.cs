@@ -39,19 +39,29 @@ namespace Aliencube.CloudEventsNet.Tests
         }
 
         [TestMethod]
-        public void Given_InvalidContentType_When_DataIsSet_Should_ThrowException()
+        public void Given_InvalidContentType_Should_ThrowException()
         {
             var data = "hello world";
 
             var ev = new StringEvent();
 
-            ev.ContentType = "text/json";
-            Action action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            Action action = () => ev.ContentType = "text/json";
+            action.Should().Throw<InvalidContentTypeException>();
 
-            ev.ContentType = "application/json";
-            action = () => ev.Data = data;
-            action.Should().Throw<InvalidDataTypeException>();
+            action = () => ev.ContentType = "application/json";
+            action.Should().Throw<InvalidContentTypeException>();
+        }
+
+        [TestMethod]
+        public void Given_NoContentType_When_DataIsSet_Should_BeOk()
+        {
+            var data = "hello world";
+
+            var ev = new StringEvent();
+            ev.ContentType = null;
+            ev.Data = data;
+
+            ev.Data.Should().Be(data);
         }
 
         [TestMethod]

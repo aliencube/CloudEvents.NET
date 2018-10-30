@@ -105,6 +105,8 @@ namespace Aliencube.CloudEventsNet.Abstractions
         [JsonProperty("schemaURL", NullValueHandling = NullValueHandling.Ignore)]
         public virtual Uri SchemaUrl { get; set; }
 
+        private string _contentType;
+
         /// <summary>
         /// Gets or sets a content type that describes the data encoding format.
         /// </summary>
@@ -120,7 +122,22 @@ namespace Aliencube.CloudEventsNet.Abstractions
         /// </list>
         /// </example>
         [JsonProperty("contentType", NullValueHandling = NullValueHandling.Ignore)]
-        public virtual string ContentType { get; set; }
+        public virtual string ContentType
+        {
+            get
+            {
+                return this._contentType;
+            }
+            set
+            {
+                if (!this.IsValidContentType(value))
+                {
+                    throw new InvalidContentTypeException();
+                }
+
+                this._contentType = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the extensions. This is for additional metadata and this does not have a mandated structure. This enables a place for custom fields a producer or middleware might want to include and provides a place to test metadata before adding them to the CloudEvents specification. See the Extensions document (https://github.com/cloudevents/spec/blob/master/extensions.md) for a list of possible properties.
@@ -168,10 +185,17 @@ namespace Aliencube.CloudEventsNet.Abstractions
         }
 
         /// <summary>
+        /// Checks whether the data conforms the content type or not.
+        /// </summary>
+        /// <param name="contentType">Content type.</param>
+        /// <returns>Returns <c>True</c>, if content type is valid; otherwise returns <c>False</c>.</returns>
+        protected abstract bool IsValidContentType(string contentType);
+
+        /// <summary>
         /// Checks whether the data has a valid type or not.
         /// </summary>
         /// <param name="data">Data instance.</param>
-        /// <returns>Returns <c>True</c>, if data type is valid; otherwise returns <c>False</c>.</returns>
+        /// <returns>Returns <c>True</c>, if data type is valid or no content type is yet defined; otherwise returns <c>False</c>.</returns>
         protected abstract bool IsValidDataType(T data);
     }
 }
